@@ -27,7 +27,13 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
   try {
-    const data = await projectService.getById(req.params.id);
+    let data;
+    if(req.query?.teamId){
+       data = await projectService.getByTeamId(req.params.id);
+    } else {
+      data = await projectService.getById(req.params.id);
+
+    }
     if (!data) {
       return res.status(404).json({
         success: false,

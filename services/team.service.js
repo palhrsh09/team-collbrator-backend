@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Team = require("../models/team.model");
 
 class TeamService {
@@ -54,7 +55,11 @@ class TeamService {
   }
 
   async getById(id) {
-    return await Team.findById(id).lean();
+       let queryId = id;
+          if (!mongoose.Types.ObjectId.isValid(id) && typeof id === 'string') {
+        queryId = new mongoose.Types.ObjectId(id);
+      }
+    return await Team.find({_id:queryId}).lean();
   }
 
   async create(data) {

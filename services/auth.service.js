@@ -75,4 +75,22 @@ const loginUser = async ({ email, firebaseUid }) => {
 };
 
 
-module.exports = { registerUser, loginUser };
+const getAllusers = async () => {
+  try {
+    const users = await User.findAll(); 
+    return users;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getusersById = async (id) => {
+  try {
+    const user = await User.find({teamId: id}); 
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { registerUser, loginUser ,getusersById,getAllusers};

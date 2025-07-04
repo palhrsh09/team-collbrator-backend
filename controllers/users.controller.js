@@ -31,7 +31,8 @@ const login = async (req, res) => {
           name: user.name,
           email: user.email,
           role: user.role,
-          teamId: user.teamId
+          teamId: user.teamId,
+          token: token
         },
       });
   } catch (err) {
@@ -45,6 +46,7 @@ const  getAllusers = async (req, res) => {
     const users = await userService.getAllusers();
     res.status(200).json(users);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: 'Error fetching users', error });
   }
 };
@@ -56,30 +58,9 @@ const  getusersById = async (req, res) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.status(200).json(user);
   } catch (error) {
+      console.log(error)
     res.status(500).json({ message: 'Error fetching user', error });
   }
 };
 
-// PUT /api/users/:id
-const  updateusers = async (req, res) => {
-  try {
-    const updatedUser = await userService.updateusers(req.params.id, req.body);
-    if (!updatedUser) return res.status(404).json({ message: 'User not found' });
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating user', error });
-  }
-};
-
-// DELETE /api/users/:id
-const  deleteusers = async (req, res) => {
-  try {
-    const deleted = await userService.deleteusers(req.params.id);
-    if (!deleted) return res.status(404).json({ message: 'User not found' });
-    res.status(200).json({ message: 'User deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error deleting user', error });
-  }
-};
-
-module.exports = { register, login,getAllusers,getusersById ,updateusers,deleteusers};
+module.exports = { register, login,getAllusers,getusersById};
