@@ -1,0 +1,18 @@
+# Node modules
+node_modules/
+utils/*.json
+
+
+# Environment variables
+# .env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Optional:
+.DS_Store
+dist/
+build/
+coverage/
