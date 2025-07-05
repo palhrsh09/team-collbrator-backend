@@ -6,7 +6,7 @@ const register = async (req, res) => {
     const user = await userService.registerUser({ name, email, firebaseUid,role, teamId});
     res.status(201).json({ message: "User registered successfully", user });
   } catch (err) {
-    console.log(err)
+    console.error(err)
     res.status(400).json({ error: err.message });
   }
 };
@@ -15,7 +15,6 @@ const login = async (req, res) => {
   try {
     const { email, firebaseUid } = req.body;
     const { user, token } = await userService.loginUser({ email, firebaseUid });
-   console.log("token",token)
     res
       .cookie("token", token, {
         httpOnly: true,
@@ -46,7 +45,7 @@ const  getAllusers = async (req, res) => {
     const users = await userService.getAllusers();
     res.status(200).json(users);
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Error fetching users', error });
   }
 };
@@ -58,7 +57,7 @@ const  getusersById = async (req, res) => {
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.status(200).json(user);
   } catch (error) {
-      console.log(error)
+      console.error(error)
     res.status(500).json({ message: 'Error fetching user', error });
   }
 };
