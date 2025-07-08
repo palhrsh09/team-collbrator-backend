@@ -63,7 +63,7 @@ const registerUser = async ({ name, email, firebaseUid, role, teamId }) => {
 };
 
 const loginUser = async ({ email, firebaseUid }) => {
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email:email });
   if (!user) throw new Error('User not found');
 
   const isMatch = await user.comparePassword(firebaseUid);
