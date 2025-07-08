@@ -41,8 +41,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.originalUrl}`);
-  console.log(`Headers:`, req.headers);
-  console.log(`Body:`, req.body);
+  // console.log(`Headers:`, req.headers);
+  // console.log(`Body:`, req.body);
   next();
 });
 
